@@ -52,7 +52,7 @@ public class ProductService {
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 
-		return new ProductDTO(entity);
+		return new ProductDTO(entity, entity.getCategories());
 	}
 
 	@Transactional
@@ -61,7 +61,7 @@ public class ProductService {
 			Product entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new ProductDTO(entity);
+			return new ProductDTO(entity, entity.getCategories());
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
